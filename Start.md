@@ -41,3 +41,5 @@ public class Start
     	frame1.setVisible(true);
   	}//plot
 }
+
+public static double cdrag = 0.01
