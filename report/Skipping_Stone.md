@@ -35,4 +35,4 @@ Finally, math.plot library will be used to graph the trajectory, and the number 
 Sources:
 http://ilm-perso.univ-lyon1.fr/~lbocquet/JFM_skippingstones.pdf
 https://arxiv.org/pdf/physics/0210015.pdf?fbclid=IwAR1woDtKytnLSjvXn70O6Exr2CumMm3KjqteXmQlSWqXIbI88qkeXBmwR1k
-
+http://ilm-perso.univ-lyon1.fr/~lbocquet/JFM_skippingstones.pdf
