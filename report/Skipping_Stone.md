@@ -1,7 +1,11 @@
 Sofiane Ferrani and Joshua Jiang
+
 Skipping a stone: how many times can we possibly skip a stone in a lake given its initial angle of attack?
+
 Goals of the simulation
+
 The goals of our simulation are to first, calculate the maximum number of skips possibly done when skipping a stone in a lake given initial conditions, and second, graph the trajectory of the stone on the lake in a coordinate system of x with respect to y (with y = 0 at water level).
+
 Theory and equations
  
 ***we interchanged y and z in our coordinate system
