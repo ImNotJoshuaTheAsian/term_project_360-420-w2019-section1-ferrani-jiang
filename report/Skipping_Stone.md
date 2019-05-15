@@ -8,7 +8,8 @@ The goals of our simulation are to first, calculate the maximum number of skips 
 
 Theory and equations
  
-***we interchanged y and z in our coordinate system
+* could we interchanged y and z in our coordinate system
+
 There are two major stages of the trajectory of the stones. There is first the “projectile” stage, where the stone’s acceleration is only affected by gravity and drag. It occurs when the stone is above water level (y > 0). Second, there is the “collisional” stage. It occurs when the stone is at or below water level (y =< 0). 
 	Equation of motion for “projectile” stage (when y > 0)
 Along the x direction, the stone’s motion is affected by drag. Considering the force acting on the center of mass, we have:
