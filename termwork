@@ -20,15 +20,15 @@ public class termwork
 	
     public static final double DT = 1.e-3;    					//	time interval in s
     public static final double Tmax = 50.;   					//	max time in s
-	public static final double mass = 0.200; 						//	mass of the stone in kg
-	public static final double cLift = 1; 					//	coefficient of lift
-	public static final double cFriction = 0.45; 					//	coefficient of friction, or drag in water
+	public static final double mass = 0.0500; 						//	mass of the stone in kg
+	public static final double cLift = .7; 					//	coefficient of lift
+	public static final double cFriction = .3; 					//	coefficient of friction, or drag in water
 	public static final double rAir = 1.225; 					//	density of air in kg/m^3
 	public static final double rWater = 1000; 					//	desity of water in kg/m^3
-	public static final double cDrag =  0.3;					//	coefficient of drag in air
+	public static final double cDrag =  .5;					//	coefficient of drag in air
 	public static final double gravity = 9.8;					//	gravitational acceleration in m/s^2
 	public static final double radius = 0.06;					//	radius of stone in m
-	public static final double height = 0.04;					// 	height of stone in m
+	public static final double height = 0.03;					// 	height of stone in m
 	public static final double aStone = 2 * Math.PI * radius * radius + 2 * Math.PI * height;  		// area of stone in m^2
 
     // Start main method
@@ -39,7 +39,7 @@ public class termwork
 		double xInitial, yInitial;
 
 		xInitial = 0.;
-		yInitial = 0.1;						//initialize positions in x and y
+		yInitial = 0.3;						//initialize positions in x and y
 
 		// Calculate length of arrays
 		int imax = (int)(Tmax/DT);				// Maximal index
@@ -65,8 +65,8 @@ public class termwork
 		x1[0] = xInitial;
 		y1[0] = yInitial;
 
-		vx1[0] = 20.;						//initialize velocity in x
-		vy1[0] = -2.;						//initialize velocity in y
+		vx1[0] = 30.;						//initialize velocity in x
+		vy1[0] = -0.2;						//initialize velocity in y
 		speed[0] = Math.sqrt(vx1[0] * vx1[0] + vy1[0] * vy1[0]);	//speed magnitude, useful for lift and drag forces
 		angleBeta[0] = Math.atan(vy1[0]/vx1[0]);		//initialize angle of attack
 
@@ -147,7 +147,7 @@ public class termwork
 						{
 
 						counter++;
-						System.out.println("skips is working");
+						//System.out.println("skips is working");
 			
 			
 						//kinematics of the collisional process
@@ -164,8 +164,8 @@ public class termwork
 						speed[i] = Math.sqrt(vx1[i] * vx1[i] + vy1[i] * vy1[i]);
 
 						// Update acceleration during the collisional process
-						ax1[i] = accelerationx2(0.3,speed[i],y1[i]);
-						ay1[i] = accelerationy2(0.3,speed[i],y1[i]);
+						ax1[i] = accelerationx2(0.6,speed[i],y1[i]);
+						ay1[i] = accelerationy2(0.6,speed[i],y1[i]);
 									
 						//System.out.println("x position: " + x1[i]);
 						//System.out.println("y position:" + y1[i]);
@@ -187,8 +187,8 @@ public class termwork
 						speed[i] = Math.sqrt(vx1[i] * vx1[i] + vy1[i] * vy1[i]);
 
 						// Update acceleration during the collisional process
-						ax1[i] = accelerationx2(0.3,speed[i],y1[i]);
-						ay1[i] = accelerationy2(0.3,speed[i],y1[i]);
+						ax1[i] = accelerationx2(0.6,speed[i],y1[i]);
+						ay1[i] = accelerationy2(0.6,speed[i],y1[i]);
 						}
 
 					}
