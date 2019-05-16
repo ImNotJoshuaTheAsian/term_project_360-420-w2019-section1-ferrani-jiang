@@ -30,7 +30,8 @@ public class SkippingStonesCode
 	public static final double radius = 0.04;					//	radius of stone in m
 	public static final double height = 0.01;					// 	height of stone in m
 	public static final double aStone = 2 * Math.PI * radius * radius + 2 * Math.PI * height;  		// area of stone in m^2
-
+	public static final angleTheta = 0.3   						//	angle of attack in rads
+	
     // Start main method
     public static void main(String[] args)
     {
