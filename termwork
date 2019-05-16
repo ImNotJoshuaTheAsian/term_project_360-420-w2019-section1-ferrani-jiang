@@ -30,7 +30,7 @@ public class termwork
 	public static final double radius = 0.06;					//	radius of stone in m
 	public static final double height = 0.03;					// 	height of stone in m
 	public static final double aStone = 2 * Math.PI * radius * radius + 2 * Math.PI * height;  		// area of stone in m^2
-	public static final double angleTheta1 = 2.75;				//coefficient of angle theta
+	public static final double angleTheta1 = 2;				//coefficient of angle theta
 
     // Start main method
     public static void main(String[] args)
@@ -217,7 +217,7 @@ public class termwork
 		double accx;
 		double shortcut = (1 - Math.abs(height)/(radius * Math.sin(angleTheta)));
 		double aStoneSubmerged = radius * radius * (Math.acos(shortcut) - shortcut * Math.sqrt(1 - shortcut * shortcut));
-		accx = -1 * ((-cLift * Math.cos(angleTheta) + cFriction * Math.sin(angleTheta)) * rWater * speed * speed * aStoneSubmerged)/(2 * mass);
+		accx = -1/2 * rWater * speed * speed * shortcut*(cLift*Math.sin(angleTheta)+cFriction*Math.cos(angleTheta));
 		//System.out.println("x acceleration 2:" + accx);
 
 		return accx;
@@ -241,8 +241,9 @@ public class termwork
 		double shortcut = (1 - Math.abs(height)/(radius * Math.sin(angleTheta)));
 		//System.out.println("shortcut: " + shortcut);
 		double aStoneSubmerged = radius * radius * (Math.acos(shortcut) - shortcut * Math.sqrt(1 - shortcut * shortcut));
-		double stuff = ((cLift * Math.sin(angleTheta) - cFriction * Math.cos(angleTheta)) * rWater * speed * speed * aStoneSubmerged)/(2 * mass);
-		accy = gravity + stuff;
+		
+		double stuff = 1/2 * rWater * speed * speed * shortcut*(cLift*Math.cos(angleTheta)-cFriction*Math.sin(angleTheta));
+		accy = -1*mass * gravity * stuff;
 		/*System.out.println("stuff: " + stuff);
 		System.out.println("y acceleration 2:" + accy);
 		System.out.println("area stone submerged:" + aStoneSubmerged);
