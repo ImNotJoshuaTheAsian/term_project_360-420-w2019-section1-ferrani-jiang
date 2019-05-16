@@ -91,7 +91,7 @@ public class termwork
 			for(int i = 2; i < imax; i++)
 			{
 				//plotting trajectory on a x posisition versus y position graph
-				if (vx1[i-1] < 0.)
+				if (vx1[i-1] < 0. && ay2[i] < 0.)
 				{
 					System.out.println("rock has stopped moving");
 					System.out.println("skips: " + counter);
