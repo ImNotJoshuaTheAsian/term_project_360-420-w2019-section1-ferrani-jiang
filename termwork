@@ -30,7 +30,6 @@ public class termwork
 	public static final double radius = 0.06;					//	radius of stone in m
 	public static final double height = 0.03;					// 	height of stone in m
 	public static final double aStone = 2 * Math.PI * radius * radius + 2 * Math.PI * height;  		// area of stone in m^2
-	public static final double angleTheta1 = 2;				//coefficient of angle theta
 
     // Start main method
     public static void main(String[] args)
@@ -66,8 +65,8 @@ public class termwork
 		x1[0] = xInitial;
 		y1[0] = yInitial;
 
-		vx1[0] = 30.;						//initialize velocity in x
-		vy1[0] = -0.2;						//initialize velocity in y
+		vx1[0] = 5.;						//initialize velocity in x
+		vy1[0] = -0.;						//initialize velocity in y
 		speed[0] = Math.sqrt(vx1[0] * vx1[0] + vy1[0] * vy1[0]);	//speed magnitude, useful for lift and drag forces
 		angleBeta[0] = Math.atan(vy1[0]/vx1[0]);		//initialize angle of attack
 
@@ -91,7 +90,7 @@ public class termwork
 			for(int i = 2; i < imax; i++)
 			{
 				//plotting trajectory on a x posisition versus y position graph
-				if (vx1[i-1] < 0. && ay2[i] < 0.)
+				if (vx1[i-1] < 0.)
 				{
 					System.out.println("rock has stopped moving");
 					System.out.println("skips: " + counter);
@@ -148,7 +147,7 @@ public class termwork
 						{
 
 						counter++;
-						System.out.println("skips is working");
+						//System.out.println("skips is working");
 			
 			
 						//kinematics of the collisional process
@@ -165,8 +164,8 @@ public class termwork
 						speed[i] = Math.sqrt(vx1[i] * vx1[i] + vy1[i] * vy1[i]);
 
 						// Update acceleration during the collisional process
-						ax1[i] = accelerationx2(angleTheta1,speed[i],y1[i]);
-						ay1[i] = accelerationy2(angleTheta1,speed[i],y1[i]);
+						ax1[i] = accelerationx2(1.56,speed[i],y1[i]);
+						ay1[i] = accelerationy2(1.56,speed[i],y1[i]);
 									
 						//System.out.println("x position: " + x1[i]);
 						//System.out.println("y position:" + y1[i]);
@@ -188,8 +187,8 @@ public class termwork
 						speed[i] = Math.sqrt(vx1[i] * vx1[i] + vy1[i] * vy1[i]);
 
 						// Update acceleration during the collisional process
-						ax1[i] = accelerationx2(angleTheta1,speed[i],y1[i]);
-						ay1[i] = accelerationy2(angleTheta1,speed[i],y1[i]);
+						ax1[i] = accelerationx2(1.56,speed[i],y1[i]);
+						ay1[i] = accelerationy2(1.56,speed[i],y1[i]);
 						}
 
 					}
@@ -197,8 +196,6 @@ public class termwork
 				}
 		
 			} // end of for loop
-								System.out.println("skips: " + counter);
-
 
 
 		} // end main
@@ -216,8 +213,8 @@ public class termwork
     {
 		double accx;
 		double shortcut = (1 - Math.abs(height)/(radius * Math.sin(angleTheta)));
-		double aStoneSubmerged = radius * radius * (Math.acos(shortcut) - shortcut * Math.sqrt(1 - shortcut * shortcut));
-		accx = -1/2 * rWater * speed * speed * shortcut*(cLift*Math.sin(angleTheta)+cFriction*Math.cos(angleTheta));
+		double aStoneSubmerged = (radius * Math.abs(height))/(sin(angleTheta));
+		accx = -1 * ((cLift * Math.sin(angleTheta) + cFriction * Math.cos(angleTheta)) * rWater * speed * speed * aStoneSubmerged)/(2 * mass);
 		//System.out.println("x acceleration 2:" + accx);
 
 		return accx;
@@ -240,10 +237,9 @@ public class termwork
 		double accy;
 		double shortcut = (1 - Math.abs(height)/(radius * Math.sin(angleTheta)));
 		//System.out.println("shortcut: " + shortcut);
-		double aStoneSubmerged = radius * radius * (Math.acos(shortcut) - shortcut * Math.sqrt(1 - shortcut * shortcut));
-		
-		double stuff = 1/2 * rWater * speed * speed * shortcut*(cLift*Math.cos(angleTheta)-cFriction*Math.sin(angleTheta));
-		accy = -1*mass * gravity * stuff;
+		double aStoneSubmerged = (radius * Math.abs(height))/(sin(angleTheta));
+		double stuff = ((cLift * Math.cos(angleTheta) + cFriction * Math.sin(angleTheta)) * rWater * speed * speed * aStoneSubmerged)/(2 * mass);
+		accy = gravity + stuff;
 		/*System.out.println("stuff: " + stuff);
 		System.out.println("y acceleration 2:" + accy);
 		System.out.println("area stone submerged:" + aStoneSubmerged);
