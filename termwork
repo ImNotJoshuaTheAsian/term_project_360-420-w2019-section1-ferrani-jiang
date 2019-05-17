@@ -225,7 +225,7 @@ public class termwork
     {
 		double accy;
 		
-		accy = -1 * gravity * mass + (-1 * cDrag * rAir * speed * speed * aStone * Math.sin(angleBeta))/(2 * mass);
+		accy = -1 * gravity + (-1 * cDrag * rAir * speed * speed * aStone * Math.sin(angleBeta))/(2 * mass);
 		
 		return accy;
     }
