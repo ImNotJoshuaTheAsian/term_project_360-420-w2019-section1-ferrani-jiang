@@ -1,3 +1,4 @@
+//importa libraries
 import java.io.*;
 import java.lang.*;
 import java.awt.*;
@@ -16,7 +17,7 @@ import java.util.Arrays;
 
 public class FinalCode
 {
-
+	//all the constant coefficient that will be used. All units are in SI
 	public static final double angleAlpha = 0.0375;
 	public static final double dt = 0.001;
 	public static final double tMax = 50;
@@ -30,16 +31,18 @@ public class FinalCode
 	public static void main(String[] args)
 	{
 
-		double counter = 0;
-		double xInitial, yInitial;
+		double counter = 0;						//counter of number of skips
+		double xInitial, yInitial;					//initial position of x and y
 		Boolean previousState = false;					//records the state of the stone at y[i-1]; false means in the air, true means in water
 		Boolean currentState = false;					//records the state of the stone at y[i]; false means in the air, true means in water
-
+		
+		//initial values of everything
 		xInitial = 0;
 		yInitial = 50;
 
 		int imax = (int) (tMax/dt);
 
+		//declaring arrays for speed, time, velocity, angle, etc...
 		double[] t = new double[imax];	
 
 		double[] x1 = new double[imax];  						
@@ -52,7 +55,8 @@ public class FinalCode
 
 		double[] speed = new double[imax];						
 		double[] angleBeta = new double[imax];  	
-
+		
+		//initial conditions of the arrays
 		t[0] = 0;
 		x1[0] = xInitial;
 		y1[0] = yInitial;
@@ -65,10 +69,12 @@ public class FinalCode
 
 		ax1[0] = accelerationx1(angleBeta[0],speed[0]);
 		ay1[0] = accelerationy1(angleBeta[0],speed[0]);
-
+		
+		//start for loop
 		for (int i = 1; i < imax; i++)
 		{
-
+			//when the velocity in x is below 0, the rock stops moving
+			//end code such as print
 			if(vx1[i-1] < 0)
 			{
 				// This is the code for the end of rock skipping simulation
@@ -94,21 +100,24 @@ public class FinalCode
 				}
 
 			}
-
+			
+			//when the rock is moving and its velocity in x is above 0
 			else
 			{
 				// main skipping loop
 				previousState = currentState;
-
+				
+				//when the rok is in the air
 				if (y1[i-1] > 0)
 				{
 					// The rock is moving/accelerating normally in the air
 					currentState = false;
-
+					
+					//formula for new conditions like speed, angle, acceleration
 					vx1[i] = vx1[i-1] + ax1[i-1] * dt;
-					System.out.println("vx1: " + vx1[i]);
+					//System.out.println("vx1: " + vx1[i]);
 					vy1[i] = vy1[i-1] + ay1[i-1] * dt;
-					System.out.println("vy1: " + vy1[i]);
+					//System.out.println("vy1: " + vy1[i]);
 
 					x1[i] = x1[i-1] + vx1[i-1] * dt;
 					y1[i] = y1[i-1] + vy1[i-1] * dt;
@@ -118,12 +127,13 @@ public class FinalCode
 					angleBeta[i] = Math.atan(vy1[i]/vx1[i]);
 
 					ax1[i] = accelerationx1(angleBeta[i],speed[i]);
-					System.out.println("ax1: " + ax1[i]);
+					//System.out.println("ax1: " + ax1[i]);
 					ay1[i] = accelerationy1(angleBeta[i],speed[i]);
-					System.out.println();
+					//System.out.println();
 
 				}
-
+				
+				//when the rock is under water ( a different formula to calculate speed angle and acceleration
 				else
 				{
 					currentState = true;
@@ -134,10 +144,13 @@ public class FinalCode
 					{
 						counter++;
 					}
-
+					
+					//new formual for calculation
 					vx1[i] = vx1[i-1] * Math.cos(angleAlpha - angleBeta[i-1]) * Math.cos(angleAlpha);
 					double stop  = 2 * gravity * radius * Math.sin(angleAlpha)/(vy1[i-1]*vy1[i-1]);
 					System.out.println("Stopping criteria " + stop);
+					
+					//condition for the rock to stop moving
 					if (stop > 1)
 					{
 						// Rock isn't coming out of water because not enough vertical speed
@@ -167,6 +180,7 @@ public class FinalCode
 						}
 
 					}
+					//update new variables of speed, etc...
 					vy1[i] = Math.abs(vy1[i-1] * (Math.sqrt(1 - stop)));
 					System.out.println("vy1[i-1]: " + vy1[i-1]);
 
@@ -190,7 +204,8 @@ public class FinalCode
 		}
 
 	}
-
+	
+	//method for the acceleration in x in the air
 	public static double accelerationx1(double angle, double velocity)
 	{
 
@@ -203,7 +218,8 @@ public class FinalCode
 		return accx;
 
 	}
-
+	
+	//method for the acceleration in y in the air
 	public static double accelerationy1(double angle, double velocity)
 	{
 
